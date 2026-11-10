@@ -104,7 +104,7 @@ def load_history():
         sys.exit(1)
 
 def normalize(text):
-    return re.sub(r"\\s+", " ", text.lower()).strip()
+    return re.sub(r"\s+", " ", text.lower()).strip()
 
 def make_post(day, slot, used):
     rng = random.Random(f"{day.isoformat()}-{slot}-wisdom-v2")
@@ -156,13 +156,13 @@ def main():
 
     used = {normalize(item) for item in history["posts"]}
     sentence, tags = make_post(day, slot, used)
-    message = sentence + "\\n\\n" + " ".join("#" + tag for tag in tags)
+    message = sentence + "\n\n" + " ".join("#" + tag for tag in tags)
     post_id = publish(message)
 
     history["posts"].append(sentence)
     history["published_slots"].append(slot_key)
     HISTORY_FILE.write_text(
-        json.dumps(history, ensure_ascii=False, indent=2) + "\\n",
+        json.dumps(history, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     print(f"Опубликовано: {day}, слот {SLOT_TIMES[slot]}, post_id={post_id}")
