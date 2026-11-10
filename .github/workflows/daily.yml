@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
       VK_ACCESS_TOKEN: ${{ secrets.VK_ACCESS_TOKEN }}
@@ -31,9 +31,9 @@ jobs:
       SLOT_CRON: ${{ github.event.schedule }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Install dependencies
